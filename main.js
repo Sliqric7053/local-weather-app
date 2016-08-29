@@ -22,7 +22,6 @@ function loadData() {
 
   // api keys
   var weatherApiKey = '&APPID=e0e46f68f42f81a76ba608830c740dc2';
-  var mapApiKey     = '&key=AIzaSyCzu6WxG9fwKEjct2c-iG2amQgHuf_d2-I';
 
   //weather api's
   var metric        = 'http://api.openweathermap.org/data/2.5/find?q=' + city + '&units=metric';

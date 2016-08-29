@@ -25,7 +25,7 @@ function loadData() {
   var mapApiKey     = '&key=AIzaSyCzu6WxG9fwKEjct2c-iG2amQgHuf_d2-I';
 
   //weather api's
-  var metric        = 'https://api.openweathermap.org/data/2.5/find?q=' + city + '&units=metric';
+  var metric        = 'http://api.openweathermap.org/data/2.5/find?q=' + city + '&units=metric';
   // var imperial      = 'api.openweathermap.org/data/2.5/find?q=' + city + '&units=imperial';
   var tempUrl       = metric + weatherApiKey;
   console.log('tempUrl: ' + tempUrl);
@@ -36,7 +36,7 @@ function loadData() {
 
     for (var i = 0; i < lists.length; i++) {
       var item       = lists[0];
-      var icon       = "<img src='https://openweathermap.org/img/w/" + item.weather[0].icon + ".png'>";
+      var icon       = "<img src='http://openweathermap.org/img/w/" + item.weather[0].icon + ".png'>";
       var background = '<img class="img" id="background" src="' + unsplashUrl + item.weather[0].main + '">';
       var bgImg      = unsplashUrl + item.weather[0].main;
       $body.css('background-image', 'url(' + bgImg + ')');

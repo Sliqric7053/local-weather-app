@@ -22,7 +22,6 @@ function loadData() {
 
   // api keys
   var weatherApiKey = '&APPID=e0e46f68f42f81a76ba608830c740dc2';
-  var mapApiKey     = '&key=AIzaSyCzu6WxG9fwKEjct2c-iG2amQgHuf_d2-I';
 
   //weather api's
   var metric        = 'https://api.openweathermap.org/data/2.5/find?q=' + city + '&units=metric';
@@ -48,8 +47,12 @@ function loadData() {
       // $displayCity.append(icon);
       $displayCity.append('<p>' + 'Temperature for city of ' + item.name + ', ' + item.sys.country + '</p>' + '<br>');
       $displayCity.append('<p>' + 'Current: ' + item.main.temp + '&#8451' + '</p>');
+      if (item.main.temp !== item.main.temp_min) {
       $displayCity.append('<p>' + 'Min: ' + item.main.temp_min + '&#8451' + '</p>');
+      }
+      if (item.main.temp !== item.main.temp_max) {
       $displayCity.append('<p>' + 'Max: ' + item.main.temp_max + '&#8451' + '</p>');
+      }
       $displayCity.append('<p>' + item.weather[0].description + '</p>').append(icon);
       // $displayCity.append('<img src="'+ mapUrl + '">');
 

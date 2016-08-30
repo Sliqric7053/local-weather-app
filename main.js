@@ -21,7 +21,7 @@ function loadData() {
   console.log('unsplashUrl: ' + unsplashUrl);
 
   // api keys
-  var weatherApiKey = '&APPID=e0e46f68f42f81a76ba608830c740dc2';
+  var weatherApiKey = config.weatherApiKey;
 
   //weather api's
   var metric        = 'http://api.openweathermap.org/data/2.5/find?q=' + city + '&units=metric';
@@ -42,9 +42,6 @@ function loadData() {
       console.log('icon string: ' + icon);
       console.log('background string: ' + bgImg);
 
-      // var mapUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=' + item.coord.lon + ',' + item.coord.lat + '&zoom=12&size=400x400&maptype=satellite' + mapApiKey;
-      // console.log('mapUrl string: ' + mapUrl);
-      // $displayCity.append(icon);
       $displayCity.append('<p>' + 'Temperature for city of ' + item.name + ', ' + item.sys.country + '</p>' + '<br>');
       $displayCity.append('<p>' + 'Current: ' + item.main.temp + '&#8451' + '</p>');
       if (item.main.temp !== item.main.temp_min) {
@@ -54,8 +51,6 @@ function loadData() {
       $displayCity.append('<p>' + 'Max: ' + item.main.temp_max + '&#8451' + '</p>');
       }
       $displayCity.append('<p>' + item.weather[0].description + '</p>').append(icon);
-      // $displayCity.append('<img src="'+ mapUrl + '">');
-
     }
 
   });

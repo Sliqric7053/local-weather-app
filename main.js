@@ -61,9 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
 $(function(){
 
 function loadData() {
-  var $icon   = $('#icon');
-  var $number = $('#number');
-  var $symbol = $('#symbol');
   var $city   = $('#city');
   var $body   = $('body');
   var $displayCity = $('#temp-data');

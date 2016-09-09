@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var $displayCity = $('#temp-data');
 
   //get geo location
-  var geoUrl = 'http://freegeoip.net/json/';
+  var geoUrl = 'https://freegeoip.net/json/';
   console.log(geoUrl);
 
   //get city property - to be used in weather api

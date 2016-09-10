@@ -2,7 +2,6 @@
 
 //automatically run this code when the page loads
 document.addEventListener('DOMContentLoaded', function() {
-
   var $body        = $('body');
   var $displayCity = $('#temp-data');
 
@@ -44,6 +43,11 @@ document.addEventListener('DOMContentLoaded', function() {
         var bgImg      = unsplashUrl + data.query.results.channel.item.condition.text;
         $body.css('background-image', 'url(' + bgImg + ')');
         console.log('background string: ' + bgImg);
+        }
+        if (data.query.results.channel.item.condition.text == 'Showers') {
+          var bgImg      = unsplashUrl + 'rain';
+          $body.css('background-image', 'url(' + bgImg + ')');
+          console.log('background string: ' + bgImg);
         }
         //add text from apis to HTML
         $displayCity.append('<p>' + 'Temperature for city of ' + data.query.results.channel.location.city + ', ' + data.query.results.channel.location.country + '</p>' + '<br>');
@@ -99,6 +103,11 @@ function loadData() {
       var bgImg      = unsplashUrl + data.query.results.channel.item.condition.text;
       $body.css('background-image', 'url(' + bgImg + ')');
       console.log('background string: ' + bgImg);
+      }
+      if (data.query.results.channel.item.condition.text == 'Showers') {
+        var bgImg      = unsplashUrl + 'rain';
+        $body.css('background-image', 'url(' + bgImg + ')');
+        console.log('background string: ' + bgImg);
       }
       //add text from apis to HTML
       $displayCity.append('<p>' + 'Temperature for city of ' + data.query.results.channel.location.city + ', ' + data.query.results.channel.location.country + '</p>' + '<br>');

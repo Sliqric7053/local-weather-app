@@ -7,12 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   //get geo location
   var geoUrl = 'https://freegeoip.net/json/';
-  console.log(geoUrl);
+  console.log('geoUrl: ' + geoUrl);
 
   //get city property - to be used in weather api
   $.getJSON(geoUrl, function(data) {
     geoCity = data.city;
-    console.log(geoCity);
+    console.log('geoCity: ' + geoCity);
 
     // photo api
     var unsplashUrl = 'https://source.unsplash.com/daily?nature,';
@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //weather api - using FreeGeoIP api to obtain current computer location
     var tempUrl = "https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + geoCity + "') and u='c'&format=json";
-    console.log('tempUrl: ' + tempUrl);
 
     // get weather info from Yahoo weather api
     $.getJSON(tempUrl, function(data) {
@@ -29,26 +28,49 @@ document.addEventListener('DOMContentLoaded', function() {
       for (var x in data.query.results.channel) {
         resultArr.push([x, data.query.results.channel[x]])
       }
-      console.log('resultArr: ' + resultArr);
-
         //weather icons
         var icon = '<img src="http://l.yimg.com/a/i/us/we/52/' + data.query.results.channel.item.condition.code + '.gif">';
         console.log(icon);
+
         //display background photo using unsplash api
-        if (data.query.results.channel.item.condition.text == 'Breezy') {
-          var bgImg      = unsplashUrl + 'wind';
+        var bgImg;
+        switch (data.query.results.channel.item.condition.text) {
+          case 'Breezy':
+              bgImg = unsplashUrl + 'wind';
+              $body.css('background-image', 'url(' + bgImg + ')');
+              console.log('background string: ' + bgImg);
+            break;
+          case 'Showers':
+              bgImg = unsplashUrl + 'rain';
+              $body.css('background-image', 'url(' + bgImg + ')');
+              console.log('background string: ' + bgImg);
+            break;
+          case 'Mostly Cloudy':
+              bgImg = unsplashUrl + 'clouds';
+              $body.css('background-image', 'url(' + bgImg + ')');
+              console.log('background string: ' + bgImg);
+            break;
+          case 'Partly Cloudy':
+              bgImg = unsplashUrl + 'cloudy';
+              $body.css('background-image', 'url(' + bgImg + ')');
+              console.log('background string: ' + bgImg);
+            break;
+          case 'Mostly Clear':
+              bgImg = unsplashUrl + 'sky';
+              $body.css('background-image', 'url(' + bgImg + ')');
+              console.log('background string: ' + bgImg);
+            break;
+          case 'Mostly Sunny':
+              bgImg = unsplashUrl + 'sunny';
+              $body.css('background-image', 'url(' + bgImg + ')');
+              console.log('background string: ' + bgImg);
+            break;
+          default:
+          bgImg = unsplashUrl + data.query.results.channel.item.condition.text;
           $body.css('background-image', 'url(' + bgImg + ')');
           console.log('background string: ' + bgImg);
-        } else {
-        var bgImg      = unsplashUrl + data.query.results.channel.item.condition.text;
-        $body.css('background-image', 'url(' + bgImg + ')');
-        console.log('background string: ' + bgImg);
         }
-        if (data.query.results.channel.item.condition.text == 'Showers') {
-          var bgImg      = unsplashUrl + 'rain';
-          $body.css('background-image', 'url(' + bgImg + ')');
-          console.log('background string: ' + bgImg);
-        }
+
         //add text from apis to HTML
         $displayCity.append('<p>' + 'Temperature for city of ' + data.query.results.channel.location.city + ', ' + data.query.results.channel.location.country + '</p>' + '<br>');
         $displayCity.append('<p>' + 'Current: ' + Math.round(data.query.results.channel.item.condition.temp) + '&#8451' + ' (' + Math.round((data.query.results.channel.item.condition.temp * 9 / 5 + 32)) + '&#8457)' + '</p>');
@@ -94,21 +116,46 @@ function loadData() {
       //weather icons
       var icon = '<img src="http://l.yimg.com/a/i/us/we/52/' + data.query.results.channel.item.condition.code + '.gif">';
       console.log(icon);
+
       //display background photo using unsplash api
-      if (data.query.results.channel.item.condition.text == 'Breezy') {
-        var bgImg      = unsplashUrl + 'wind';
+      var bgImg;
+      switch (data.query.results.channel.item.condition.text) {
+        case 'Breezy':
+            bgImg = unsplashUrl + 'wind';
+            $body.css('background-image', 'url(' + bgImg + ')');
+            console.log('background string: ' + bgImg);
+          break;
+        case 'Showers':
+            bgImg = unsplashUrl + 'rain';
+            $body.css('background-image', 'url(' + bgImg + ')');
+            console.log('background string: ' + bgImg);
+          break;
+        case 'Mostly Cloudy':
+            bgImg = unsplashUrl + 'clouds';
+            $body.css('background-image', 'url(' + bgImg + ')');
+            console.log('background string: ' + bgImg);
+          break;
+        case 'Partly Cloudy':
+            bgImg = unsplashUrl + 'cloudy';
+            $body.css('background-image', 'url(' + bgImg + ')');
+            console.log('background string: ' + bgImg);
+          break;
+        case 'Mostly Clear':
+            bgImg = unsplashUrl + 'sky';
+            $body.css('background-image', 'url(' + bgImg + ')');
+            console.log('background string: ' + bgImg);
+          break;
+        case 'Mostly Sunny':
+            bgImg = unsplashUrl + 'sun';
+            $body.css('background-image', 'url(' + bgImg + ')');
+            console.log('background string: ' + bgImg);
+          break;
+        default:
+        bgImg = unsplashUrl + data.query.results.channel.item.condition.text;
         $body.css('background-image', 'url(' + bgImg + ')');
         console.log('background string: ' + bgImg);
-      } else {
-      var bgImg      = unsplashUrl + data.query.results.channel.item.condition.text;
-      $body.css('background-image', 'url(' + bgImg + ')');
-      console.log('background string: ' + bgImg);
       }
-      if (data.query.results.channel.item.condition.text == 'Showers') {
-        var bgImg      = unsplashUrl + 'rain';
-        $body.css('background-image', 'url(' + bgImg + ')');
-        console.log('background string: ' + bgImg);
-      }
+
       //add text from apis to HTML
       $displayCity.append('<p>' + 'Temperature for city of ' + data.query.results.channel.location.city + ', ' + data.query.results.channel.location.country + '</p>' + '<br>');
       $displayCity.append('<p>' + 'Current: ' + Math.round(data.query.results.channel.item.condition.temp) + '&#8451' + ' (' + Math.round((data.query.results.channel.item.condition.temp * 9 / 5 + 32)) + '&#8457)' + '</p>');

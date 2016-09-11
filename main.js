@@ -65,6 +65,11 @@ document.addEventListener('DOMContentLoaded', function() {
               $body.css('background-image', 'url(' + bgImg + ')');
               console.log('background string: ' + bgImg);
             break;
+          case 'Thunderstorms':
+              bgImg = unsplashUrl + 'storm';
+              $body.css('background-image', 'url(' + bgImg + ')');
+              console.log('background string: ' + bgImg);
+            break;
           default:
           bgImg = unsplashUrl + data.query.results.channel.item.condition.text;
           $body.css('background-image', 'url(' + bgImg + ')');
@@ -85,8 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
 $(function(){
 
 function loadData() {
-  var $city   = $('#city');
-  var $body   = $('body');
+  var $city        = $('#city');
+  var $body        = $('body');
   var $displayCity = $('#temp-data');
 
   //clear out old data before new request
@@ -94,7 +99,7 @@ function loadData() {
   $('img[src*="unsplash"]').remove(); //Selects elements that have the specified attribute with a value containing a given substring
 
   //params required for the app functionality
-  var city          = $city.val();
+  var city = $city.val();
 
   // photo api
   var unsplashUrl = 'https://source.unsplash.com/daily?nature,';
@@ -147,6 +152,11 @@ function loadData() {
           break;
         case 'Mostly Sunny':
             bgImg = unsplashUrl + 'sun';
+            $body.css('background-image', 'url(' + bgImg + ')');
+            console.log('background string: ' + bgImg);
+          break;
+        case 'Thunderstorms':
+            bgImg = unsplashUrl + 'storm';
             $body.css('background-image', 'url(' + bgImg + ')');
             console.log('background string: ' + bgImg);
           break;

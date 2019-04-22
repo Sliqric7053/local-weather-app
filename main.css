@@ -117,12 +117,14 @@ hr {
   border-left: 1px solid #1eddb8;
   border-radius: 2em;
 }
-.search-header button:hover {
+
+.search-header button:hover,
+.cel-to-fah button:hover {
   background: #20e7c1;
 }
 
 .cel-to-fah button {
   background: transparent;
-  color: aliceblue;
+  color: rgb(255, 255, 255);
   border-radius: 10px;
 }

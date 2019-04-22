@@ -28,7 +28,11 @@ document.addEventListener(
         lon = '-94.1629';
         updateUI();
 
-        console.log('Center of the Earth!');
+        console.info(`
+        The Latitude and Longitude of center of the earth is 34.5133 and -94.1629 respectively.
+        34.5133 Latitude and -94.1629 Longitude can be mapped to closest address of Earth Lane, Mena, AR 71953, USA.
+        Center of the earth is located in sub-locality, Mena locality, Polk District, Arkansas State of 71953 Country.
+        `);
         console.warn(`ERROR(${err.code}): ${err.message}`);
       }
 

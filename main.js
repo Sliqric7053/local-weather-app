@@ -23,6 +23,12 @@ document.addEventListener(
       }
 
       function error(err) {
+        // set default latlon
+        lat = '34.5133';
+        lon = '-94.1629';
+        updateUI();
+
+        console.log('Center of the Earth!');
         console.warn(`ERROR(${err.code}): ${err.message}`);
       }
 

@@ -4,7 +4,9 @@
   "description": "Check out weather forecast for any city in the world",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "local": "npx http-server .",
+    "browserify": "browserify main.js > bundle.js"
   },
   "repository": {
     "type": "git",

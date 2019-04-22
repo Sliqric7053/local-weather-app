@@ -69,7 +69,7 @@ hr {
   margin: 5% auto;
 }
 
-@media (max-width: 320px) {
+@media (max-width: 768px) {
   body {
     overflow: auto;
   }

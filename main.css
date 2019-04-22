@@ -40,6 +40,8 @@ body {
   -o-background-size: cover;
   background-size: cover;
   overflow: hidden;
+  height: 100%;
+  margin: 0;
 }
 
 h1 {
@@ -63,7 +65,7 @@ hr {
   text-emphasis-color: white;
 }
 
-#container {
+.container {
   margin: 5% auto;
 }
 

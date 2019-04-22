@@ -1,30 +1,57 @@
-// Shorthand for $( document ).ready() --> ensure below code will only run once the page Document Object Model (DOM) is ready for JavaScript code to execute.
-$(function() {
-  function loadData() {
-    const $city = $('#city');
-    const $celcius = $('#show-celcius');
-    const $fahrenheit = $('#show-fahrenheit');
-    const $body = $('body');
-    const $displayCity = $('#temp-data');
+document.addEventListener(
+  'DOMContentLoaded',
+  function init() {
+    let lat;
+    let lon;
+    let openWeatherURL;
+    const APP_ID = 'e0e46f68f42f81a76ba608830c740dc2';
 
-    //clear out old data before new request
-    $displayCity.empty();
-    $('img[src*="unsplash"]').remove(); //Selects elements that have the specified attribute with a value containing a given substring
+    function getGeoInfo() {
+      // Get GEO info
 
-    //params required for the app functionality
-    const city = $city.val();
+      const options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      };
 
-    // photo api
-    const unsplashUrl = 'https://source.unsplash.com/daily?nature,';
+      function success(pos) {
+        const crd = pos.coords;
+        lat = crd.latitude.toString();
+        lon = crd.longitude.toString();
+        updateUI();
+      }
 
-    // ipstack location
-    const geoUrl =
-      'http://api.ipstack.com/105.246.4.51?access_key=36abae59b119489a660b47b9ba7803d6';
-    //get city property - to be used in weather api
-    $.getJSON(geoUrl, function(ipstackResponse) {
-      const APP_ID = 'e0e46f68f42f81a76ba608830c740dc2';
-      const lat = ipstackResponse.latitude;
-      const lon = ipstackResponse.longitude;
+      function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+      }
+
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(success, error, options);
+      } else {
+        // centre of the earth :)
+        lat = '34.5133';
+        lon = '-94.1629';
+      }
+    }
+
+    function updateUI() {
+      const $city = $('#city');
+      const $celcius = $('#show-celcius');
+      const $fahrenheit = $('#show-fahrenheit');
+      const $body = $('body');
+      const $displayCity = $('#temp-data');
+
+      //params required for the app functionality
+      const city = $city.val();
+
+      // photo api
+      const unsplashUrl = 'https://source.unsplash.com/daily?nature,';
+
+      //clear out old data before new request
+      $displayCity.empty();
+      //Selects elements that have the specified attribute with a value containing a given substring
+      $('img[src*="unsplash"]').remove();
 
       if (!city) {
         openWeatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${APP_ID}`;
@@ -35,7 +62,7 @@ $(function() {
       // get weather info from openWeatherMap api
       $.getJSON(openWeatherURL, function(data) {
         //weather icons
-        const icon = `<img src="http://openweathermap.org/img/w/${
+        const icon = `<img src="https://openweathermap.org/img/w/${
           data.weather[0].icon
         }.png">`;
 
@@ -131,11 +158,10 @@ $(function() {
       }).fail(function(jqxhr, textStatus, error) {
         $displayCity.append(`<p>City ${error}! 😢</p>`);
       });
-    }).fail(function(jqxhr, textStatus, error) {
-      console.log('ipstack api call failed with: ', error);
-    });
-    return false;
-  }
-  loadData();
-  $('#form-container').submit(loadData);
-});
+      return false;
+    }
+    getGeoInfo();
+    $('#form-container').submit(updateUI);
+  },
+  false
+);
